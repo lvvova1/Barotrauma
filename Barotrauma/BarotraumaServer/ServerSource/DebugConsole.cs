@@ -1242,6 +1242,17 @@ namespace Barotrauma
                 }
             });
 
+            AssignOnClientRequestExecute(
+                "settraitor",
+                (Client client, Vector2 cursorWorldPos, string[] args) =>
+                {
+                    Character traitor = (args.Length == 0) ? client.Character : FindMatchingCharacter(args);
+                    traitor.IsTraitor = !traitor.IsTraitor;
+
+                    NewMessage(traitor.IsTraitor ? traitor.Name + " Стал предателем!" : traitor.Name + " Прекратил быть предателем!", Color.Green);
+                }
+            );
+
             commands.Add(new Command("servername", "servername [name]: Change the name of the server.", (string[] args) =>
             {
                 GameMain.Server.ServerName = string.Join(" ", args);
