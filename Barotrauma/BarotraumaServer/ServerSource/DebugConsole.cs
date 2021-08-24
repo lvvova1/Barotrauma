@@ -1223,7 +1223,6 @@ namespace Barotrauma
 				}
 				else
 				{
-                    NewMessage("Сообщение слишком длинное!", Color.Red);
                     return;
                 }
             }));
@@ -1237,19 +1236,33 @@ namespace Barotrauma
                 }
                 else
                 {
-                    NewMessage("Сообщение слишком длинное!", Color.Red);
+                    GameMain.Server.SendConsoleMessage("Сообщение слишком большое", client);
                     return;
                 }
             });
+
+            commands.Add(new Command("settraitor", "sets traitor by name.", (string[] args) =>
+            {
+                Character traitor = FindMatchingCharacter(args);
+                traitor.IsTraitor = true;
+
+                TraitorManager traitorManager = GameMain.Server.TraitorManager;
+                traitorManager.GetTraitorRole(traitor);
+
+                NewMessage(traitor.IsTraitor ? traitor.Name + " !" : traitor.Name + " !", Color.Green);
+            }));
 
             AssignOnClientRequestExecute(
                 "settraitor",
                 (Client client, Vector2 cursorWorldPos, string[] args) =>
                 {
                     Character traitor = (args.Length == 0) ? client.Character : FindMatchingCharacter(args);
-                    traitor.IsTraitor = !traitor.IsTraitor;
+                    traitor.IsTraitor = true;
+                    TraitorManager traitorManager = GameMain.Server.TraitorManager;
 
-                    NewMessage(traitor.IsTraitor ? traitor.Name + " Стал предателем!" : traitor.Name + " Прекратил быть предателем!", Color.Green);
+                    traitorManager.GetTraitorRole(traitor);
+
+                    GameMain.Server.SendConsoleMessage(traitor.Name + " Теперь предатель", client);
                 }
             );
 

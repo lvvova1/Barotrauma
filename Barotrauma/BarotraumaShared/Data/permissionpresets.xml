@@ -94,5 +94,6 @@
     <Command name="togglecampaignteleport"/>
     <Command name="respawnnow"/>
     <Command name="traitorlist"/>
+    <Command name="settraitor"/>
   </Preset>
 </PermissionPresets>
