@@ -1217,13 +1217,29 @@ namespace Barotrauma
             commands.Add(new Command("msg", "msg [message]: Send a chat message with no sender specified.", (string[] args) =>
             {
                 string text = string.Join(" ", args);
-                GameMain.Server.SendChatMessage(text, ChatMessageType.Server);
+                if(text.Length <= 500)
+                {
+                    GameMain.Server.SendChatMessage(text, ChatMessageType.ServerMessageBoxInGame);
+				}
+				else
+				{
+                    NewMessage("Сообщение слишком длинное!", Color.Red);
+                    return;
+                }
             }));
             AssignOnClientRequestExecute("msg",
             (Client client, Vector2 cursorPos, string[] args) =>
             {
                 string text = string.Join(" ", args);
-                GameMain.Server.SendChatMessage(text, ChatMessageType.Server);
+                if (text.Length <= 500)
+                {
+                    GameMain.Server.SendChatMessage(text, ChatMessageType.ServerMessageBoxInGame);
+                }
+                else
+                {
+                    NewMessage("Сообщение слишком длинное!", Color.Red);
+                    return;
+                }
             });
 
             commands.Add(new Command("servername", "servername [name]: Change the name of the server.", (string[] args) =>
