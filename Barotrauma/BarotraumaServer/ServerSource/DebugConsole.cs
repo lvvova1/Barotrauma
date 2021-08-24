@@ -1214,7 +1214,9 @@ namespace Barotrauma
                 GameMain.Server.SendChatMessage(text, ChatMessageType.Server);
             });
 
-            commands.Add(new Command("msg", "msg [message]: Send a chat message with no sender specified.", (string[] args) =>
+			#region msg
+
+			commands.Add(new Command("msg", "msg [message]: Send a chat message with no sender specified.", (string[] args) =>
             {
                 string text = string.Join(" ", args);
                 if(text.Length <= 500)
@@ -1241,31 +1243,86 @@ namespace Barotrauma
                 }
             });
 
+            #endregion
+
+            #region msgDir
+
+            commands.Add(new Command("msgDir", "msgDir [message] [name]", (string[] args) =>
+            {
+
+                if (GameMain.Server == null || args.Length != 2) return;
+
+                var targetClient = GameMain.Server.ConnectedClients.Find(c => c.Name == args[1]);
+                string text = string.Join(" ", args[0]);
+                
+                if (text.Length > 470 || targetClient == null)
+                    return;
+                
+                    GameMain.Server.SendDirectChatMessage(text, targetClient, ChatMessageType.ServerMessageBoxInGame);
+            }));
+            AssignOnClientRequestExecute("msgDir",
+            (Client client, Vector2 cursorPos, string[] args) =>
+            {
+                if (GameMain.Server == null || args.Length != 2) return;
+
+                string text = string.Join(" ", args[0]);
+                text = string.Join("Отправленное сообщение: ", text);
+
+                if (text.Length > 470 || client == null)
+                    return;
+
+                GameMain.Server.SendDirectChatMessage(text, client, ChatMessageType.ServerMessageBoxInGame);
+            });
+
+            #endregion
+
+            #region setTraitor
             commands.Add(new Command("settraitor", "sets traitor by name.", (string[] args) =>
             {
-                Character traitor = FindMatchingCharacter(args);
-                traitor.IsTraitor = true;
+                var targetClient = GameMain.Server.ConnectedClients.Find(c => c.Name == args[0]);
+                targetClient.Character.IsTraitor = true;
 
                 TraitorManager traitorManager = GameMain.Server.TraitorManager;
-                traitorManager.GetTraitorRole(traitor);
 
-                NewMessage(traitor.IsTraitor ? traitor.Name + " !" : traitor.Name + " !", Color.Green);
+                NewMessage(targetClient.Character.IsTraitor ? targetClient.Character.Name + " Предатель!" : targetClient.Character.Name + " Теперь не предатель!", Color.Green);
             }));
 
-            AssignOnClientRequestExecute(
-                "settraitor",
-                (Client client, Vector2 cursorWorldPos, string[] args) =>
+            //AssignOnClientRequestExecute(
+            //    "settraitor",
+            //    (Client client, Vector2 cursorWorldPos, string[] args) =>
+            //    {
+            //        Character traitor = (args.Length == 0) ? client.Character : FindMatchingCharacter(args);
+            //        traitor.IsTraitor = true;
+            //        TraitorManager traitorManager = GameMain.Server.TraitorManager;
+
+            //        traitorManager.GetTraitorRole(traitor);
+
+            //        GameMain.Server.SendConsoleMessage(traitor.Name + " Теперь предатель", client);
+            //    }
+            //);
+            #endregion
+            /*
+            commands.Add(new Command("mute", "mute [name]: Prevent the client from speaking through the voice chat.", (string[] args) =>
+            {
+                if (GameMain.Server == null || args.Length == 0) return;
+                var client = GameMain.Server.ConnectedClients.Find(c => c.Name == args[0]);
+                if (client == null)
                 {
-                    Character traitor = (args.Length == 0) ? client.Character : FindMatchingCharacter(args);
-                    traitor.IsTraitor = true;
-                    TraitorManager traitorManager = GameMain.Server.TraitorManager;
-
-                    traitorManager.GetTraitorRole(traitor);
-
-                    GameMain.Server.SendConsoleMessage(traitor.Name + " Теперь предатель", client);
+                    ThrowError("Client \"" + args[0] + "\" not found.");
+                    return;
                 }
-            );
-
+                client.Muted = true;
+                GameMain.Server.SendDirectChatMessage(TextManager.Get("MutedByServer"), client, ChatMessageType.MessageBox);
+            },
+            () =>
+            {
+                if (GameMain.Server == null) return null;
+                return new string[][]
+                {
+                    GameMain.Server.ConnectedClients.Select(c => c.Name).ToArray()
+                };
+            }));
+            */
             commands.Add(new Command("servername", "servername [name]: Change the name of the server.", (string[] args) =>
             {
                 GameMain.Server.ServerName = string.Join(" ", args);
