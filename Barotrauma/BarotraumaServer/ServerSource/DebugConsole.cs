@@ -1247,7 +1247,7 @@ namespace Barotrauma
 
             #region msgDir
 
-            commands.Add(new Command("msgDir", "msgDir [message] [name]", (string[] args) =>
+            commands.Add(new Command("msgdir", "msgDir [message] [name]", (string[] args) =>
             {
 
                 if (GameMain.Server == null || args.Length != 2) return;
@@ -1260,7 +1260,7 @@ namespace Barotrauma
                 
                     GameMain.Server.SendDirectChatMessage(text, targetClient, ChatMessageType.ServerMessageBoxInGame);
             }));
-            AssignOnClientRequestExecute("msgDir",
+            AssignOnClientRequestExecute("msgdir",
             (Client client, Vector2 cursorPos, string[] args) =>
             {
                 if (GameMain.Server == null || args.Length != 2) return;
@@ -1282,11 +1282,15 @@ namespace Barotrauma
                 var targetClient = GameMain.Server.ConnectedClients.Find(c => c.Name == args[0]);
                 targetClient.Character.IsTraitor = true;
 
-                TraitorManager traitorManager = GameMain.Server.TraitorManager;
-
-                NewMessage(targetClient.Character.IsTraitor ? targetClient.Character.Name + " Предатель!" : targetClient.Character.Name + " Теперь не предатель!", Color.Green);
+                GameMain.Server.SendDirectChatMessage(targetClient.Character.IsTraitor ? targetClient.Character.Name + " Предатель!" : targetClient.Character.Name + " Теперь не предатель!", targetClient, ChatMessageType.MessageBox);
+            },() =>
+            {
+                if (GameMain.Server == null) return null;
+                return new string[][]
+                {
+                    GameMain.Server.ConnectedClients.Select(c => c.Name).ToArray()
+                };
             }));
-
             //AssignOnClientRequestExecute(
             //    "settraitor",
             //    (Client client, Vector2 cursorWorldPos, string[] args) =>

@@ -95,6 +95,6 @@
     <Command name="respawnnow"/>
     <Command name="traitorlist"/>
     <Command name="settraitor"/>
-    <Command name="msgDir"/>
+    <Command name="msgdir"/>
   </Preset>
 </PermissionPresets>
