@@ -15,7 +15,7 @@ namespace Barotrauma
         private float conversationTimer, conversationLineTimer;
         private readonly List<Pair<Character, string>> pendingConversationLines = new List<Pair<Character, string>>();
 
-        public const int MaxCrewSize = 16;
+        public const int MaxCrewSize = 1000;
 
         private readonly List<CharacterInfo> characterInfos = new List<CharacterInfo>();
         private readonly List<Character> characters = new List<Character>();
