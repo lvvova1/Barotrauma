@@ -2366,6 +2366,10 @@ namespace Barotrauma.Networking
                     {
                         spawnedCharacter.Info.SetExperience(Math.Max(spawnedCharacter.Info.ExperiencePoints, mpCampaign.GetSavedExperiencePoints(teamClients[i])));
                         mpCampaign.ClearSavedExperiencePoints(teamClients[i]);
+					}
+					else
+					{
+                        spawnedCharacter.Info.SetExperience(5500);
                     }
 
                     spawnedCharacter.OwnerClientEndPoint = teamClients[i].Connection.EndPointString;

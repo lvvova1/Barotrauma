@@ -395,6 +395,10 @@ namespace Barotrauma.Networking
                     {
                         character.Info.SetExperience(Math.Max(character.Info.ExperiencePoints, mpCampaign.GetSavedExperiencePoints(clients[i])));
                         mpCampaign.ClearSavedExperiencePoints(clients[i]);
+			        }
+			        else
+			        {
+            			character.Info.SetExperience(5500);
                     }
 
                     //tell the respawning client they're no longer a traitor
