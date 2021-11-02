@@ -783,7 +783,7 @@ namespace Barotrauma
                 {
                     if (item.ParentInventory.Owner is Character c)
                     {
-                        if (c.TeamID == CharacterTeamType.FriendlyNPC || c.TeamID == CharacterTeamType.Team2)
+                        if (c.TeamID == CharacterTeamType.Team1 || c.TeamID == CharacterTeamType.Team2)
                         {
                             // Taken by a player/bot (if npc or monster would take the item, we'd probably still want it to spawn back to the main sub.
                             return;
@@ -1257,7 +1257,7 @@ namespace Barotrauma
                         // The guards don't react when the player attacks instigators.
                         return c.IsSecurity ? AIObjectiveCombat.CombatMode.None : (Character.CombatAction != null ? Character.CombatAction.WitnessReaction : AIObjectiveCombat.CombatMode.Retreat);
                     }
-                    else if (attacker.TeamID == CharacterTeamType.FriendlyNPC && !(attacker.AIController.IsMentallyUnstable || attacker.AIController.IsMentallyUnstable))
+                    else if (attacker.TeamID == CharacterTeamType.Team1 && !(attacker.AIController.IsMentallyUnstable || attacker.AIController.IsMentallyUnstable))
                     {
                         if (c.IsSecurity)
                         {
