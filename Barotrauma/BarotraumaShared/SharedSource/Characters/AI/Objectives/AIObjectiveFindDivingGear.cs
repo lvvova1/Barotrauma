@@ -98,7 +98,7 @@ namespace Barotrauma
                                 character.Speak(TextManager.Get("DialogGetOxygenTank"), null, 0, "getoxygentank", 30.0f);
                             }
                         }
-                        return new AIObjectiveContainItem(character, OXYGEN_SOURCE, targetItem.GetComponent<ItemContainer>(), objectiveManager, spawnItemIfNotFound: character.TeamID == CharacterTeamType.FriendlyNPC)
+                        return new AIObjectiveContainItem(character, OXYGEN_SOURCE, targetItem.GetComponent<ItemContainer>(), objectiveManager, spawnItemIfNotFound: character.TeamID == CharacterTeamType.FriendlyRealNPC)
                         {
                             AllowToFindDivingGear = false,
                             AllowDangerousPressure = true,
@@ -113,7 +113,7 @@ namespace Barotrauma
                         // Try to seek any oxygen sources, even if they have minimal amount of oxygen.
                         TryAddSubObjective(ref getOxygen, () =>
                         {
-                            return new AIObjectiveContainItem(character, OXYGEN_SOURCE, targetItem.GetComponent<ItemContainer>(), objectiveManager, spawnItemIfNotFound: character.TeamID == CharacterTeamType.FriendlyNPC)
+                            return new AIObjectiveContainItem(character, OXYGEN_SOURCE, targetItem.GetComponent<ItemContainer>(), objectiveManager, spawnItemIfNotFound: character.TeamID == CharacterTeamType.FriendlyRealNPC)
                             {
                                 AllowToFindDivingGear = false,
                                 AllowDangerousPressure = true,

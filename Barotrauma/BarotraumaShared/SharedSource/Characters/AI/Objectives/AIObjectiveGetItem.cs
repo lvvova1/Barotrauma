@@ -282,7 +282,7 @@ namespace Barotrauma
                 if (mySub == null) { continue; }
                 if (!AllowStealing)
                 {
-                    if (character.TeamID == CharacterTeamType.FriendlyNPC != item.SpawnedInOutpost) { continue; }
+                    if (character.TeamID == CharacterTeamType.FriendlyRealNPC != item.SpawnedInOutpost) { continue; }
                 }
                 if (!CheckItem(item)) { continue; }
                 if (item.Container != null)
@@ -353,7 +353,7 @@ namespace Barotrauma
                             Entity.Spawner.AddToSpawnQueue(prefab, character.Inventory, onSpawned: (Item spawnedItem) => 
                             {
                                 targetItem = spawnedItem; 
-                                if (character.TeamID == CharacterTeamType.FriendlyNPC && (character.Submarine?.Info.IsOutpost ?? false))
+                                if (character.TeamID == CharacterTeamType.FriendlyRealNPC && (character.Submarine?.Info.IsOutpost ?? false))
                                 {
                                     spawnedItem.SpawnedInOutpost = true;
                                 }

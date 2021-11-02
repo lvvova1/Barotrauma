@@ -114,7 +114,7 @@ namespace Barotrauma
                     {
                         if (newCharacter == null) { return; }
                         newCharacter.Prefab = humanPrefab;
-                        newCharacter.TeamID = CharacterTeamType.FriendlyNPC;
+                        newCharacter.TeamID = CharacterTeamType.FriendlyRealNPC;
                         newCharacter.EnableDespawn = false;
                         humanPrefab.GiveItems(newCharacter, newCharacter.Submarine);
                         if (LootingIsStealing)

@@ -149,7 +149,7 @@ namespace Barotrauma
 
         protected override float GetPriority()
         {
-            if (character.TeamID == CharacterTeamType.FriendlyNPC && Enemy != null)
+            if (character.TeamID == CharacterTeamType.FriendlyRealNPC && Enemy != null)
             {
                 if (Enemy.Submarine == null || (Enemy.Submarine.TeamID != character.TeamID && Enemy.Submarine != character.Submarine))
                 {
@@ -362,7 +362,7 @@ namespace Barotrauma
                         }
                     }
                 }
-                bool isAllowedToSeekWeapons = !EnemyIsClose() && character.TeamID != CharacterTeamType.FriendlyNPC && IsOffensiveOrArrest;
+                bool isAllowedToSeekWeapons = !EnemyIsClose() && character.TeamID != CharacterTeamType.FriendlyRealNPC && IsOffensiveOrArrest;
                 if (!isAllowedToSeekWeapons)
                 {
                     if (WeaponComponent == null)
@@ -718,7 +718,7 @@ namespace Barotrauma
                 }
                 else
                 {
-                    retreatTarget = findSafety.FindBestHull(HumanAIController.VisibleHulls, allowChangingTheSubmarine: character.TeamID != CharacterTeamType.FriendlyNPC);
+                    retreatTarget = findSafety.FindBestHull(HumanAIController.VisibleHulls, allowChangingTheSubmarine: character.TeamID != CharacterTeamType.FriendlyRealNPC);
                     findHullTimer = findHullInterval * Rand.Range(0.9f, 1.1f);
                 }
             }
@@ -807,7 +807,7 @@ namespace Barotrauma
                 }
                 else
                 {
-                    if (character.TeamID == CharacterTeamType.FriendlyNPC)
+                    if (character.TeamID == CharacterTeamType.FriendlyRealNPC)
                     {
                         ItemPrefab prefab = ItemPrefab.Find(null, "handcuffs");
                         if (prefab != null)
@@ -847,12 +847,12 @@ namespace Barotrauma
                 RemoveFollowTarget();
                 return;
             }
-            if (character.TeamID == CharacterTeamType.FriendlyNPC)
+            if (character.TeamID == CharacterTeamType.FriendlyRealNPC)
             {
                 // Confiscate stolen goods and all weapons
                 foreach (var item in Enemy.Inventory.AllItemsMod)
                 {
-                    if (character.TeamID == CharacterTeamType.FriendlyNPC && item.StolenDuringRound ||
+                    if (character.TeamID == CharacterTeamType.FriendlyRealNPC && item.StolenDuringRound ||
                         item.HasTag("weapon") ||
                         item.GetComponent<MeleeWeapon>() != null ||
                         item.GetComponent<RangedWeapon>() != null)

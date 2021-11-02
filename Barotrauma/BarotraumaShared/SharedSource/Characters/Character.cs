@@ -21,7 +21,8 @@ namespace Barotrauma
         None = 0,
         Team1 = 1,
         Team2 = 2,
-        FriendlyNPC = 3
+        FriendlyNPC = 3,
+        FriendlyRealNPC = 4
     }
 
     partial class Character : Entity, IDamageable, ISerializableEntity, IClientSerializable, IServerSerializable
@@ -226,7 +227,7 @@ namespace Barotrauma
             }
         }
 
-        public bool IsOnPlayerTeam => TeamID == CharacterTeamType.Team1 || TeamID == CharacterTeamType.Team2;
+        public bool IsOnPlayerTeam => TeamID == CharacterTeamType.FriendlyNPC || TeamID == CharacterTeamType.Team2;
 
         public bool IsInstigator => CombatAction != null && CombatAction.IsInstigator;
         public CombatAction CombatAction;
@@ -3949,7 +3950,7 @@ namespace Barotrauma
 
             if (GameMain.GameSession != null)
             {
-                if (GameMain.GameSession.Campaign != null && TeamID == CharacterTeamType.Team1 && !IsAssistant)
+                if (GameMain.GameSession.Campaign != null && TeamID == CharacterTeamType.FriendlyNPC && !IsAssistant)
                 {
                     GameMain.GameSession.Campaign.CrewHasDied = true;
                 }

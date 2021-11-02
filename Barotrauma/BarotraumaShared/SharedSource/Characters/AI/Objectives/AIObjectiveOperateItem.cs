@@ -72,7 +72,7 @@ namespace Barotrauma
                 {
                     if (!isOrder)
                     {
-                        if (reactor.LastUserWasPlayer && character.TeamID != CharacterTeamType.FriendlyNPC)
+                        if (reactor.LastUserWasPlayer && character.TeamID != CharacterTeamType.FriendlyRealNPC)
                         {
                             // The reactor was previously operated by a player -> ignore.
                             Priority = 0;

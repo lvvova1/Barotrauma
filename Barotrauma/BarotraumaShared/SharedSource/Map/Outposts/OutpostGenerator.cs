@@ -1481,10 +1481,10 @@ namespace Barotrauma
                 {
                     gotoTarget = outpost.GetHulls(true).GetRandom(Rand.RandSync.Server);
                 }
-                characterInfo.TeamID = CharacterTeamType.FriendlyNPC;
+                characterInfo.TeamID = CharacterTeamType.FriendlyRealNPC;
                 var npc = Character.Create(CharacterPrefab.HumanConfigFile, SpawnAction.OffsetSpawnPos(gotoTarget.WorldPosition, 100.0f), ToolBox.RandomSeed(8), characterInfo, hasAi: true, createNetworkEvent: true);
                 npc.AnimController.FindHull(gotoTarget.WorldPosition, true);
-                npc.TeamID = CharacterTeamType.FriendlyNPC;
+                npc.TeamID = CharacterTeamType.FriendlyRealNPC;
                 npc.Prefab = humanPrefab;
                 if (!outpost.Info.OutpostNPCs.ContainsKey(humanPrefab.Identifier))
                 {

@@ -758,7 +758,7 @@ namespace Barotrauma
 
         private void HandleRelocation(Item item)
         {
-            if (item.Submarine?.TeamID == CharacterTeamType.FriendlyNPC)
+            if (item.Submarine?.TeamID == CharacterTeamType.FriendlyRealNPC)
             {
                 if (itemsToRelocate.Contains(item)) { return; }
                 itemsToRelocate.Add(item);
@@ -783,7 +783,7 @@ namespace Barotrauma
                 {
                     if (item.ParentInventory.Owner is Character c)
                     {
-                        if (c.TeamID == CharacterTeamType.Team1 || c.TeamID == CharacterTeamType.Team2)
+                        if (c.TeamID == CharacterTeamType.FriendlyNPC || c.TeamID == CharacterTeamType.Team2)
                         {
                             // Taken by a player/bot (if npc or monster would take the item, we'd probably still want it to spawn back to the main sub.
                             return;
@@ -968,7 +968,7 @@ namespace Barotrauma
                 // for now, escorted characters use the report system to get targets but do not speak. escort-character specific dialogue could be implemented
                 if (!Character.IsEscorted)
                 {
-                    if (Character.TeamID == CharacterTeamType.FriendlyNPC)
+                    if (Character.TeamID == CharacterTeamType.FriendlyRealNPC)
                     {
                         Character.Speak(newOrder.GetChatMessage("", targetHull?.DisplayName, givingOrderToSelf: false), ChatMessageType.Default,
                             identifier: newOrder.Prefab.Identifier + (targetHull?.DisplayName ?? "null"),
@@ -1257,7 +1257,7 @@ namespace Barotrauma
                         // The guards don't react when the player attacks instigators.
                         return c.IsSecurity ? AIObjectiveCombat.CombatMode.None : (Character.CombatAction != null ? Character.CombatAction.WitnessReaction : AIObjectiveCombat.CombatMode.Retreat);
                     }
-                    else if (attacker.TeamID == CharacterTeamType.FriendlyNPC && !(attacker.AIController.IsMentallyUnstable || attacker.AIController.IsMentallyUnstable))
+                    else if (attacker.TeamID == CharacterTeamType.FriendlyRealNPC && !(attacker.AIController.IsMentallyUnstable || attacker.AIController.IsMentallyUnstable))
                     {
                         if (c.IsSecurity)
                         {
@@ -1572,7 +1572,7 @@ namespace Barotrauma
 
             bool stolenItemsInside = item.OwnInventory?.FindAllItems(it => it.SpawnedInOutpost && !it.AllowStealing, recursive: true).Any() ?? false;
 
-            if ((item.SpawnedInOutpost && !item.AllowStealing || stolenItemsInside) && thief.TeamID != CharacterTeamType.FriendlyNPC && !item.HasTag("handlocker"))
+            if ((item.SpawnedInOutpost && !item.AllowStealing || stolenItemsInside) && thief.TeamID != CharacterTeamType.FriendlyRealNPC && !item.HasTag("handlocker"))
             {
                 foreach (Character otherCharacter in Character.CharacterList)
                 {
@@ -1898,7 +1898,7 @@ namespace Barotrauma
             if (!teamGood) { return false; }
             bool speciesGood = other.SpeciesName == me.SpeciesName || other.Params.CompareGroup(me.Params.Group);
             if (!speciesGood) { return false; }
-            if (me.TeamID == CharacterTeamType.FriendlyNPC && other.TeamID == CharacterTeamType.Team1 && GameMain.GameSession?.GameMode is CampaignMode campaign)
+            if (me.TeamID == CharacterTeamType.FriendlyRealNPC && other.TeamID == CharacterTeamType.FriendlyNPC && GameMain.GameSession?.GameMode is CampaignMode campaign)
             {
                 var reputation = campaign.Map?.CurrentLocation?.Reputation;
                 if (reputation != null && reputation.NormalizedValue < Reputation.HostileThreshold)
@@ -1916,13 +1916,13 @@ namespace Barotrauma
             switch (myTeam)
             {
                 case CharacterTeamType.None:
-                case CharacterTeamType.Team1:
+                case CharacterTeamType.FriendlyNPC:
                 case CharacterTeamType.Team2:
                     // Only friendly to the same team and friendly NPCs
-                    return otherTeam == CharacterTeamType.FriendlyNPC;
-                case CharacterTeamType.FriendlyNPC:
+                    return otherTeam == CharacterTeamType.FriendlyRealNPC;
+                case CharacterTeamType.FriendlyRealNPC:
                     // Friendly NPCs are friendly to both teams
-                    return otherTeam == CharacterTeamType.Team1 || otherTeam == CharacterTeamType.Team2;
+                    return otherTeam == CharacterTeamType.FriendlyNPC || otherTeam == CharacterTeamType.Team2;
                 default:
                     return true;
             }

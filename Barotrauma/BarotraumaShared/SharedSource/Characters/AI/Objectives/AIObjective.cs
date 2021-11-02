@@ -251,16 +251,16 @@ namespace Barotrauma
         {
             get 
             {
-                if (IgnoreAtOutpost && Level.IsLoadedOutpost && character.TeamID != CharacterTeamType.FriendlyNPC)
+                if (IgnoreAtOutpost && Level.IsLoadedOutpost && character.TeamID != CharacterTeamType.FriendlyRealNPC)
                 {
-                    if (Submarine.MainSub != null && Submarine.MainSub.DockedTo.None(s => s.TeamID != CharacterTeamType.FriendlyNPC && s.TeamID != character.TeamID))
+                    if (Submarine.MainSub != null && Submarine.MainSub.DockedTo.None(s => s.TeamID != CharacterTeamType.FriendlyRealNPC && s.TeamID != character.TeamID))
                     {
                         return false;
                     }
                 }
                 if (!AllowOutsideSubmarine && character.Submarine == null) { return false; }
                 if (AllowInAnySub) { return true; }
-                if ((AllowInFriendlySubs && character.Submarine.TeamID == CharacterTeamType.FriendlyNPC) || character.IsEscorted) { return true; }
+                if ((AllowInFriendlySubs && character.Submarine.TeamID == CharacterTeamType.FriendlyRealNPC) || character.IsEscorted) { return true; }
                 return character.Submarine.TeamID == character.TeamID || character.Submarine.DockedTo.Any(sub => sub.TeamID == character.TeamID);
             }
         }

@@ -181,7 +181,7 @@ namespace Barotrauma
                 {
                     searchHullTimer = SearchHullInterval * Rand.Range(0.9f, 1.1f);
                     previousSafeHull = currentSafeHull;
-                    currentSafeHull = FindBestHull(allowChangingTheSubmarine: character.TeamID != CharacterTeamType.FriendlyNPC);
+                    currentSafeHull = FindBestHull(allowChangingTheSubmarine: character.TeamID != CharacterTeamType.FriendlyRealNPC);
                     cannotFindSafeHull = currentSafeHull == null || HumanAIController.NeedsDivingGear(currentSafeHull, out _);
                     if (currentSafeHull == null)
                     {
@@ -368,7 +368,7 @@ namespace Barotrauma
                     hullSafety *= distanceFactor;
                     // If the target is not inside a friendly submarine, considerably reduce the hull safety.
                     // Intentionally exclude wrecks from this check
-                    if (hull.Submarine.TeamID != character.TeamID && hull.Submarine.TeamID != CharacterTeamType.FriendlyNPC)
+                    if (hull.Submarine.TeamID != character.TeamID && hull.Submarine.TeamID != CharacterTeamType.FriendlyRealNPC)
                     {
                         hullSafety /= 10;
                     }

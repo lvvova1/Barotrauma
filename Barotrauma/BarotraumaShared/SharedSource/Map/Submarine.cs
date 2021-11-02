@@ -1386,7 +1386,7 @@ namespace Barotrauma
                 {
                     ShowSonarMarker = false;
                     PhysicsBody.FarseerBody.BodyType = BodyType.Static;
-                    TeamID = CharacterTeamType.FriendlyNPC;
+                    TeamID = CharacterTeamType.FriendlyRealNPC;
 
                     bool indestructible =
                         GameMain.NetworkMember != null &&

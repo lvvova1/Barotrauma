@@ -15,11 +15,11 @@ namespace Barotrauma
             List<Client> randList = new List<Client>(clients);
             for (int i = 0; i < randList.Count; i++)
             {
-                if (randList[i].PreferredTeam == CharacterTeamType.Team1 ||
+                if (randList[i].PreferredTeam == CharacterTeamType.FriendlyNPC ||
                     randList[i].PreferredTeam == CharacterTeamType.Team2)
                 {
                     randList[i].TeamID = randList[i].PreferredTeam;
-                    teamWeight += randList[i].PreferredTeam == CharacterTeamType.Team1 ? -1 : 1;
+                    teamWeight += randList[i].PreferredTeam == CharacterTeamType.FriendlyNPC ? -1 : 1;
                     randList.RemoveAt(i);
                     i--;
                 }
@@ -37,7 +37,7 @@ namespace Barotrauma
             {
                 if (i < halfPlayers)
                 {
-                    randList[i].TeamID = CharacterTeamType.Team1;
+                    randList[i].TeamID = CharacterTeamType.FriendlyNPC;
                 }
                 else
                 {

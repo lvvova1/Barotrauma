@@ -67,7 +67,7 @@ namespace Barotrauma
                 isBeingWatched = false;
                 foreach (Character otherCharacter in Character.CharacterList)
                 {
-                    if (HumanAIController.IsActive(otherCharacter) && otherCharacter.TeamID == CharacterTeamType.Team1 && HumanAIController.VisibleHulls.Contains(otherCharacter.CurrentHull)) // hasn't been tested yet
+                    if (HumanAIController.IsActive(otherCharacter) && otherCharacter.TeamID == CharacterTeamType.FriendlyNPC && HumanAIController.VisibleHulls.Contains(otherCharacter.CurrentHull)) // hasn't been tested yet
                     {
                         isBeingWatched = true; // act casual when player characters are around
                         escapeProgress = 0;

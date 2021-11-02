@@ -225,7 +225,7 @@ namespace Barotrauma
 
             bool requiresRescue = element.GetAttributeBool("requirerescue", false);
 
-            Character spawnedCharacter = CreateHuman(humanPrefab, characters, characterItems, submarine, requiresRescue ? CharacterTeamType.FriendlyNPC : CharacterTeamType.None, spawnPos, giveTags: true);
+            Character spawnedCharacter = CreateHuman(humanPrefab, characters, characterItems, submarine, requiresRescue ? CharacterTeamType.FriendlyRealNPC : CharacterTeamType.None, spawnPos, giveTags: true);
 
             if (spawnPos is WayPoint wp)
             {

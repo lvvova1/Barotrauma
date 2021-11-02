@@ -2028,7 +2028,7 @@ namespace Barotrauma
             }
 
             if (string.IsNullOrWhiteSpace(args[0])) { return; }
-            CharacterTeamType teamType = Character.Controlled != null ? Character.Controlled.TeamID : CharacterTeamType.Team1;
+            CharacterTeamType teamType = Character.Controlled != null ? Character.Controlled.TeamID : CharacterTeamType.FriendlyNPC;
             if (args.Length > 2)
             {
                 try

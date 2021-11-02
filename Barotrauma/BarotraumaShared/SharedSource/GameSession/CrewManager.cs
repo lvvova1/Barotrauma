@@ -217,7 +217,7 @@ namespace Barotrauma
             for (int i = 0; i < spawnWaypoints.Count; i++)
             {
                 var info = characterInfos[i];
-                info.TeamID = CharacterTeamType.Team1;
+                info.TeamID = CharacterTeamType.FriendlyNPC;
                 Character character = Character.Create(info, spawnWaypoints[i].WorldPosition, info.Name);
                 if (character.Info != null)
                 {
@@ -334,7 +334,7 @@ namespace Barotrauma
             {
                 foreach (Character npc in Character.CharacterList)
                 {
-                    if ((npc.TeamID != CharacterTeamType.FriendlyNPC && npc.TeamID != CharacterTeamType.None) || npc.CurrentHull == null || npc.IsIncapacitated) { continue; }   
+                    if ((npc.TeamID != CharacterTeamType.FriendlyRealNPC && npc.TeamID != CharacterTeamType.None) || npc.CurrentHull == null || npc.IsIncapacitated) { continue; }   
                     if (npc.AIController is HumanAIController humanAI && (humanAI.ObjectiveManager.IsCurrentObjective<AIObjectiveFindSafety>() || humanAI.ObjectiveManager.IsCurrentObjective<AIObjectiveCombat>()))
                     {
                         continue;
@@ -354,7 +354,7 @@ namespace Barotrauma
                                         dialogFlags.Remove("OutpostNPC");
                                         dialogFlags.Add("Bandit");
                                     }
-                                    else if (npc.TeamID == CharacterTeamType.FriendlyNPC)
+                                    else if (npc.TeamID == CharacterTeamType.FriendlyRealNPC)
                                     {
                                         dialogFlags.Remove("OutpostNPC");
                                         dialogFlags.Add("Hostage");
@@ -419,7 +419,7 @@ namespace Barotrauma
 #if !DEBUG
             if (isControlledCharacterNull) { return null; }
 #endif
-            if (order.Category == OrderCategory.Operate && HumanAIController.IsItemTargetedBySomeone(order.TargetItemComponent, controlledCharacter != null ? controlledCharacter.TeamID : CharacterTeamType.Team1, out Character operatingCharacter) &&
+            if (order.Category == OrderCategory.Operate && HumanAIController.IsItemTargetedBySomeone(order.TargetItemComponent, controlledCharacter != null ? controlledCharacter.TeamID : CharacterTeamType.FriendlyNPC, out Character operatingCharacter) &&
                 (isControlledCharacterNull || operatingCharacter.CanHearCharacter(controlledCharacter)))
             {
                 return operatingCharacter;

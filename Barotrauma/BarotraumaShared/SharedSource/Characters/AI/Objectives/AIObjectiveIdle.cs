@@ -193,7 +193,7 @@ namespace Barotrauma
 
                 if (currentTarget != null && !currentTargetIsInvalid)
                 {
-                    if (character.TeamID == CharacterTeamType.FriendlyNPC && !character.IsEscorted)
+                    if (character.TeamID == CharacterTeamType.FriendlyRealNPC && !character.IsEscorted)
                     {
                         if (currentTarget.Submarine.TeamID != character.TeamID)
                         {
@@ -249,7 +249,7 @@ namespace Barotrauma
                     {
                         //choose a random available hull
                         currentTarget = ToolBox.SelectWeightedRandom(targetHulls, hullWeights, Rand.RandSync.Unsynced);
-                        bool isInWrongSub = (character.TeamID == CharacterTeamType.FriendlyNPC && !character.IsEscorted) && character.Submarine.TeamID != character.TeamID;
+                        bool isInWrongSub = (character.TeamID == CharacterTeamType.FriendlyRealNPC && !character.IsEscorted) && character.Submarine.TeamID != character.TeamID;
                         bool isCurrentHullAllowed = !isInWrongSub && !IsForbidden(character.CurrentHull);
                         var path = PathSteering.PathFinder.FindPath(character.SimPosition, currentTarget.SimPosition, character.Submarine, nodeFilter: node =>
                         {
@@ -397,7 +397,7 @@ namespace Barotrauma
                 if (HumanAIController.UnsafeHulls.Contains(hull)) { continue; }
                 if (hull.Submarine == null) { continue; }
                 if (hull.Submarine.Info.IsRuin || hull.Submarine.Info.IsWreck) { continue; }
-                if (character.TeamID == CharacterTeamType.FriendlyNPC && !character.IsEscorted)
+                if (character.TeamID == CharacterTeamType.FriendlyRealNPC && !character.IsEscorted)
                 {
                     if (hull.Submarine.TeamID != character.TeamID)
                     {

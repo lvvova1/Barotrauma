@@ -92,7 +92,7 @@ namespace Barotrauma.Networking
                 }
                 foreach (WifiComponent wifiComponent in wifiComponents)
                 {
-                    wifiComponent.TeamID = CharacterTeamType.FriendlyNPC;
+                    wifiComponent.TeamID = CharacterTeamType.FriendlyRealNPC;
                 }
 
                 ResetShuttle();

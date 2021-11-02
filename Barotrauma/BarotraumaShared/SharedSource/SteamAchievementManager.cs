@@ -421,7 +421,7 @@ namespace Barotrauma
 #endif
                 var charactersInSub = Character.CharacterList.FindAll(c => 
                     !c.IsDead && 
-                    c.TeamID != CharacterTeamType.FriendlyNPC &&
+                    c.TeamID != CharacterTeamType.FriendlyRealNPC &&
                     !(c.AIController is EnemyAIController) &&
                     (c.Submarine == gameSession.Submarine || (Level.Loaded?.EndOutpost != null && c.Submarine == Level.Loaded.EndOutpost)));
 

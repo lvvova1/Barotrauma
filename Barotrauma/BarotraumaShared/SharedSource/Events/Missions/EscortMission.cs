@@ -117,7 +117,7 @@ namespace Barotrauma
                 int count = CalculateScalingEscortedCharacterCount(inMission: true);
                 for (int i = 0; i < count; i++)
                 {
-                    Character spawnedCharacter = CreateHuman(GetHumanPrefabFromElement(element), characters, characterItems, Submarine.MainSub, CharacterTeamType.FriendlyNPC, explicitStayInHullPos, humanPrefabRandSync: randSync);
+                    Character spawnedCharacter = CreateHuman(GetHumanPrefabFromElement(element), characters, characterItems, Submarine.MainSub, CharacterTeamType.FriendlyRealNPC, explicitStayInHullPos, humanPrefabRandSync: randSync);
                     if (spawnedCharacter.AIController is HumanAIController humanAI)
                     {
                         humanAI.InitMentalStateManager();

@@ -184,7 +184,7 @@ namespace Barotrauma
                 {
                     if (Timing.TotalTime < GameMain.GameSession.RoundStartTime + 120.0f && 
                         speaker?.CurrentHull != null && 
-                        (speaker.TeamID == CharacterTeamType.FriendlyNPC || speaker.TeamID == CharacterTeamType.None) && 
+                        (speaker.TeamID == CharacterTeamType.FriendlyRealNPC || speaker.TeamID == CharacterTeamType.None) && 
                         Character.CharacterList.Any(c => c.TeamID != speaker.TeamID && c.CurrentHull == speaker.CurrentHull)) 
                     {
                         currentFlags.Add("EnterOutpost"); 
@@ -224,7 +224,7 @@ namespace Barotrauma
                     }
                 }
 
-                if (speaker.TeamID == CharacterTeamType.FriendlyNPC && speaker.Submarine != null && speaker.Submarine.Info.IsOutpost)
+                if (speaker.TeamID == CharacterTeamType.FriendlyRealNPC && speaker.Submarine != null && speaker.Submarine.Info.IsOutpost)
                 {
                     currentFlags.Add("OutpostNPC");
                 }
@@ -239,7 +239,7 @@ namespace Barotrauma
                     {
                         currentFlags.Add("Bandit");
                     }
-                    else if (speaker.TeamID == CharacterTeamType.FriendlyNPC)
+                    else if (speaker.TeamID == CharacterTeamType.FriendlyRealNPC)
                     {
                         currentFlags.Add("Hostage");
                     }

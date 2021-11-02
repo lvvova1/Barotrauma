@@ -521,7 +521,7 @@ namespace Barotrauma
         public void OnReactorOverHeating(Item reactor, Character character, float deltaTime)
         {
             if (reactor?.Submarine == null || character == null) { return; }
-            if (reactor.Submarine.TeamID == CharacterTeamType.FriendlyNPC || reactor.Submarine.TeamID == character.TeamID)
+            if (reactor.Submarine.TeamID == CharacterTeamType.FriendlyRealNPC || reactor.Submarine.TeamID == character.TeamID)
             {
                 AdjustKarma(character, -ReactorOverheatKarmaDecrease * deltaTime, "Caused reactor to overheat");
             }
@@ -530,7 +530,7 @@ namespace Barotrauma
         public void OnReactorMeltdown(Item reactor, Character character)
         {
             if (reactor?.Submarine == null || character == null) { return; }
-            if (reactor.Submarine.TeamID == CharacterTeamType.FriendlyNPC || reactor.Submarine.TeamID == character.TeamID)
+            if (reactor.Submarine.TeamID == CharacterTeamType.FriendlyRealNPC || reactor.Submarine.TeamID == character.TeamID)
             {
                 AdjustKarma(character, -ReactorMeltdownKarmaDecrease, "Caused a reactor meltdown");
             }

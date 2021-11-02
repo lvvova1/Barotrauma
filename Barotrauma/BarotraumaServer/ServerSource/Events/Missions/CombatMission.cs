@@ -29,7 +29,7 @@ namespace Barotrauma
                 crews[1].Clear();
                 foreach (Character character in Character.CharacterList)
                 {
-                    if (character.TeamID == CharacterTeamType.Team1)
+                    if (character.TeamID == CharacterTeamType.FriendlyNPC)
                     {
                         crews[0].Add(character);
                     }
@@ -63,7 +63,7 @@ namespace Barotrauma
                         //make sure nobody in the other team can be revived because that would be pretty weird
                         crews[1 - i].ForEach(c => { if (!c.IsDead) c.Kill(CauseOfDeathType.Unknown, null); });
 
-                        GameMain.GameSession.WinningTeam = i == 0 ? CharacterTeamType.Team1 : CharacterTeamType.Team2;
+                        GameMain.GameSession.WinningTeam = i == 0 ? CharacterTeamType.FriendlyNPC : CharacterTeamType.Team2;
 
                         state = 1;
                         break;

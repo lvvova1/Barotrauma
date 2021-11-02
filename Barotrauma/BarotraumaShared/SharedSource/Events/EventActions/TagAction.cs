@@ -49,11 +49,11 @@ namespace Barotrauma
         {
             if (IgnoreIncapacitatedCharacters)
             {
-                ParentEvent.AddTargetPredicate(Tag, e => e is Character c && c.IsBot && !c.IsIncapacitated && (!playerCrewOnly || c.TeamID == CharacterTeamType.Team1));
+                ParentEvent.AddTargetPredicate(Tag, e => e is Character c && c.IsBot && !c.IsIncapacitated && (!playerCrewOnly || c.TeamID == CharacterTeamType.FriendlyNPC));
             }
             else
             {
-                ParentEvent.AddTargetPredicate(Tag, e => e is Character c && c.IsBot && (!playerCrewOnly || c.TeamID == CharacterTeamType.Team1));
+                ParentEvent.AddTargetPredicate(Tag, e => e is Character c && c.IsBot && (!playerCrewOnly || c.TeamID == CharacterTeamType.FriendlyNPC));
             }
         }
 

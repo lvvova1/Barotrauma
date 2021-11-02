@@ -31,9 +31,9 @@ namespace Barotrauma
 
         protected override AIObjective ObjectiveConstructor(Character target)
         {
-            AIObjectiveCombat.CombatMode combatMode = target.IsEscorted && character.TeamID == CharacterTeamType.Team1 ? AIObjectiveCombat.CombatMode.Arrest : AIObjectiveCombat.CombatMode.Offensive;
+            AIObjectiveCombat.CombatMode combatMode = target.IsEscorted && character.TeamID == CharacterTeamType.FriendlyNPC ? AIObjectiveCombat.CombatMode.Arrest : AIObjectiveCombat.CombatMode.Offensive;
             var combatObjective = new AIObjectiveCombat(character, target, combatMode, objectiveManager, PriorityModifier);
-            if (character.TeamID == CharacterTeamType.FriendlyNPC && target.TeamID == CharacterTeamType.Team1 && GameMain.GameSession?.GameMode is CampaignMode campaign)
+            if (character.TeamID == CharacterTeamType.FriendlyRealNPC && target.TeamID == CharacterTeamType.FriendlyNPC && GameMain.GameSession?.GameMode is CampaignMode campaign)
             {
                 var reputation = campaign.Map?.CurrentLocation?.Reputation;
                 if (reputation != null && reputation.NormalizedValue < Reputation.HostileThreshold)

@@ -240,7 +240,7 @@ namespace Barotrauma
             if (Character.Params.Group.Equals("human", StringComparison.OrdinalIgnoreCase))
             {
                 // Pet
-                Character.TeamID = CharacterTeamType.FriendlyNPC;
+                Character.TeamID = CharacterTeamType.FriendlyRealNPC;
             }
             var mainElement = c.Params.OriginalElement.IsOverride() ? c.Params.OriginalElement.FirstElement() : c.Params.OriginalElement;
             targetMemories = new Dictionary<AITarget, AITargetMemory>();
