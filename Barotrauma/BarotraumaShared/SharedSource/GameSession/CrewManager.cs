@@ -217,7 +217,7 @@ namespace Barotrauma
             for (int i = 0; i < spawnWaypoints.Count; i++)
             {
                 var info = characterInfos[i];
-                info.TeamID = CharacterTeamType.Team1;
+                info.TeamID = CharacterTeamType.FriendlyNPC;
                 Character character = Character.Create(info, spawnWaypoints[i].WorldPosition, info.Name);
                 if (character.Info != null)
                 {

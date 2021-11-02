@@ -199,7 +199,7 @@ namespace Barotrauma
             return Submarine.Loaded.FindAll(sub =>
                 sub != leavingSub &&
                 !leavingSub.DockedTo.Contains(sub) &&
-                sub.Info.Type == SubmarineType.Player && sub.TeamID == CharacterTeamType.Team1 && // pirate subs are currently tagged as player subs as well
+                sub.Info.Type == SubmarineType.Player && sub.TeamID == CharacterTeamType.FriendlyNPC && // pirate subs are currently tagged as player subs as well
                 sub != GameMain.NetworkMember?.RespawnManager?.RespawnShuttle &&
                 (sub.AtEndExit != leavingSub.AtEndExit || sub.AtStartExit != leavingSub.AtStartExit));
         }
@@ -574,7 +574,7 @@ namespace Barotrauma
                 {
                     if (!item.SpawnedInOutpost || item.OriginalModuleIndex < 0) { continue; }
                     var owner = item.GetRootInventoryOwner();
-                    if ((!(owner?.Submarine?.Info?.IsOutpost ?? false)) || (owner is Character character && character.TeamID == CharacterTeamType.Team1) || item.Submarine == null || !item.Submarine.Info.IsOutpost)
+                    if ((!(owner?.Submarine?.Info?.IsOutpost ?? false)) || (owner is Character character && character.TeamID == CharacterTeamType.FriendlyNPC) || item.Submarine == null || !item.Submarine.Info.IsOutpost)
                     {
                         takenItems.Add(item);
                     }

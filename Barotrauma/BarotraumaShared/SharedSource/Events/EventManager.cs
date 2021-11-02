@@ -815,11 +815,11 @@ namespace Barotrauma
                 if (hull.Submarine == null || hull.Submarine.Info.Type != SubmarineType.Player) { continue; } 
                 if (GameMain.GameSession?.GameMode is PvPMode)
                 {
-                    if (hull.Submarine.TeamID != CharacterTeamType.Team1 && hull.Submarine.TeamID != CharacterTeamType.Team2) { continue; }
+                    if (hull.Submarine.TeamID != CharacterTeamType.FriendlyNPC && hull.Submarine.TeamID != CharacterTeamType.Team2) { continue; }
                 }
                 else
                 {
-                    if (hull.Submarine.TeamID != CharacterTeamType.Team1) { continue; }
+                    if (hull.Submarine.TeamID != CharacterTeamType.FriendlyNPC) { continue; }
                 }
                 fireAmount += hull.FireSources.Sum(fs => fs.Size.X);
                 if (hull.IsWetRoom) { continue; }

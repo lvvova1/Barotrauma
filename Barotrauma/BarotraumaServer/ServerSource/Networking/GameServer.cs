@@ -2137,7 +2137,7 @@ namespace Barotrauma.Networking
             }
             else
             {
-                connectedClients.ForEach(c => c.TeamID = CharacterTeamType.Team1);
+                connectedClients.ForEach(c => c.TeamID = CharacterTeamType.FriendlyNPC);
             }
 
             if (campaign != null)
@@ -2217,7 +2217,7 @@ namespace Barotrauma.Networking
             //assign jobs and spawnpoints separately for each team
             for (int n = 0; n < teamCount; n++)
             {
-                var teamID = n == 0 ? CharacterTeamType.Team1 : CharacterTeamType.Team2;
+                var teamID = n == 0 ? CharacterTeamType.FriendlyNPC : CharacterTeamType.Team2;
 
                 Submarine.MainSubs[n].TeamID = teamID;
                 foreach (Item item in Item.ItemList)
