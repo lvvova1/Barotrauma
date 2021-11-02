@@ -310,7 +310,7 @@ namespace Barotrauma.Networking
             }
 
             SendChatMessage($"ServerMessage.JoinedServer~[client]={ClientLogName(newClient)}" + "\n" 
-            + "Steam ID: " + newClient.SteamID + "\n" + "Steam Owner ID: " + newClient.OwnerSteamID, ChatMessageType.Server, null, changeType: PlayerConnectionChangeType.Joined);
+            + "Steam ID: " + newClient.SteamID + "\n" + "Steam Owner ID: " + newClient.OwnerSteamID + "\n", ChatMessageType.Server, null, changeType: PlayerConnectionChangeType.Joined);
 
             if (previousPlayer != null && previousPlayer.Name != newClient.Name)
             {
