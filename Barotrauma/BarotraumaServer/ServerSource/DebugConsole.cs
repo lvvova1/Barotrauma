@@ -1686,6 +1686,10 @@ namespace Barotrauma
                     tpCharacter.Submarine = null;
                     tpCharacter.AnimController.SetPosition(ConvertUnits.ToSimUnits(cursorWorldPos));
                     tpCharacter.AnimController.FindHull(cursorWorldPos, true);
+                    if (tpCharacter.AIController?.SteeringManager is IndoorsSteeringManager pathSteering)
+                    {
+                        pathSteering.ResetPath();
+                    }
                 }
             );
 
