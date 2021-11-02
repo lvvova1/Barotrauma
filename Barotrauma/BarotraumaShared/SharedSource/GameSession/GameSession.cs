@@ -357,7 +357,7 @@ namespace Barotrauma
             Submarine = Submarine.MainSub = new Submarine(SubmarineInfo);
             foreach (Submarine sub in Submarine.GetConnectedSubs())
             {
-                sub.TeamID = CharacterTeamType.FriendlyNPC;
+                sub.TeamID = CharacterTeamType.Team1;
                 foreach (Item item in Item.ItemList)
                 {
                     if (item.Submarine != sub) { continue; }

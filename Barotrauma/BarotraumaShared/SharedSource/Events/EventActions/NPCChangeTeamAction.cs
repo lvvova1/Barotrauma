@@ -32,7 +32,7 @@ namespace Barotrauma
                 // characters will still remain on friendlyNPC team for rest of the tick
                 npc.SetOriginalTeam(TeamTag);
 
-                if (AddToCrew && (TeamTag == CharacterTeamType.Team1 || TeamTag == CharacterTeamType.Team2))
+                if (AddToCrew && (TeamTag == CharacterTeamType.FriendlyNPC || TeamTag == CharacterTeamType.Team2))
                 {
                     npc.Info.StartItemsGiven = true;
 

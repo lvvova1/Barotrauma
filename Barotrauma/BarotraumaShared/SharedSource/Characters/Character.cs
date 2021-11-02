@@ -226,7 +226,7 @@ namespace Barotrauma
             }
         }
 
-        public bool IsOnPlayerTeam => TeamID == CharacterTeamType.FriendlyNPC || TeamID == CharacterTeamType.Team2;
+        public bool IsOnPlayerTeam => TeamID == CharacterTeamType.Team1 || TeamID == CharacterTeamType.Team2;
 
         public bool IsInstigator => CombatAction != null && CombatAction.IsInstigator;
         public CombatAction CombatAction;
@@ -3949,7 +3949,7 @@ namespace Barotrauma
 
             if (GameMain.GameSession != null)
             {
-                if (GameMain.GameSession.Campaign != null && TeamID == CharacterTeamType.FriendlyNPC && !IsAssistant)
+                if (GameMain.GameSession.Campaign != null && TeamID == CharacterTeamType.Team1 && !IsAssistant)
                 {
                     GameMain.GameSession.Campaign.CrewHasDied = true;
                 }

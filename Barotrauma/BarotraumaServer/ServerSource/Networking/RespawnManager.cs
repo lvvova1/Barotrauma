@@ -54,7 +54,7 @@ namespace Barotrauma.Networking
             if (GameMain.Server.ServerSettings.BotSpawnMode == BotSpawnMode.Normal)
             {
                 return Character.CharacterList
-                    .FindAll(c => c.TeamID == CharacterTeamType.FriendlyNPC && c.AIController != null && c.Info != null && c.IsDead)
+                    .FindAll(c => c.TeamID == CharacterTeamType.Team1 && c.AIController != null && c.Info != null && c.IsDead)
                     .Select(c => c.Info)
                     .ToList();
             }
@@ -64,7 +64,7 @@ namespace Barotrauma.Networking
                 (!c.SpectateOnly || (!GameMain.Server.ServerSettings.AllowSpectating && GameMain.Server.OwnerConnection != c.Connection)));
 
             var existingBots = Character.CharacterList
-                .FindAll(c => c.TeamID == CharacterTeamType.FriendlyNPC && c.AIController != null && c.Info != null);
+                .FindAll(c => c.TeamID == CharacterTeamType.Team1 && c.AIController != null && c.Info != null);
 
             int requiredBots = GameMain.Server.ServerSettings.BotCount - currPlayerCount;
             requiredBots -= existingBots.Count(b => !b.IsDead);
@@ -311,7 +311,7 @@ namespace Barotrauma.Networking
 
                 //all characters are in Team 1 in game modes/missions with only one team.
                 //if at some point we add a game mode with multiple teams where respawning is possible, this needs to be reworked
-                c.TeamID = CharacterTeamType.FriendlyNPC;
+                c.TeamID = CharacterTeamType.Team1;
                 if (c.CharacterInfo == null) { c.CharacterInfo = new CharacterInfo(CharacterPrefab.HumanSpeciesName, c.Name); }
             }
             List<CharacterInfo> characterInfos = clients.Select(c => c.CharacterInfo).ToList();
@@ -380,7 +380,7 @@ namespace Barotrauma.Networking
                 }
 
                 var character = Character.Create(characterInfos[i], (forceSpawnInMainSub ? mainSubSpawnPoints[i] : shuttleSpawnPoints[i]).WorldPosition, characterInfos[i].Name, isRemotePlayer: !bot, hasAi: bot);
-                character.TeamID = CharacterTeamType.FriendlyNPC;
+                character.TeamID = CharacterTeamType.Team1;
                 character.LoadTalents();
 
                 respawnedCharacters.Add(character);

@@ -94,11 +94,11 @@ namespace Barotrauma
                     {
                         switch (mission.Key)
                         {
-                            case CharacterTeamType.FriendlyNPC:
+                            case CharacterTeamType.Team1:
                                 winningTeam = (winningTeam == CharacterTeamType.None) ? CharacterTeamType.Team2 : CharacterTeamType.None;
                                 break;
                             case CharacterTeamType.Team2:
-                                winningTeam = (winningTeam == CharacterTeamType.None) ? CharacterTeamType.FriendlyNPC : CharacterTeamType.None;
+                                winningTeam = (winningTeam == CharacterTeamType.None) ? CharacterTeamType.Team1 : CharacterTeamType.None;
                                 break;
                             default:
                                 break;
@@ -137,13 +137,13 @@ namespace Barotrauma
                         startCountdown = MathHelper.Lerp(server.ServerSettings.TraitorsMinRestartDelay, server.ServerSettings.TraitorsMaxRestartDelay, (float)RandomDouble());
                         return;
                     }
-                    if (Character.CharacterList.Count(c => !c.IsDead && c.TeamID == CharacterTeamType.FriendlyNPC || c.TeamID == CharacterTeamType.Team2) <= 1)
+                    if (Character.CharacterList.Count(c => !c.IsDead && c.TeamID == CharacterTeamType.Team1 || c.TeamID == CharacterTeamType.Team2) <= 1)
                     {
                         return;
                     }
                     if (GameMain.GameSession.Missions.Any(m => m is CombatMission))
                     {
-                        var teamIds = new[] { CharacterTeamType.FriendlyNPC, CharacterTeamType.Team2 };
+                        var teamIds = new[] { CharacterTeamType.Team1, CharacterTeamType.Team2 };
                         foreach (var teamId in teamIds)
                         {
                             if (server.ConnectedClients.Count(c => c.Character != null && !c.Character.IsDead && c.TeamID == teamId) < 2)
