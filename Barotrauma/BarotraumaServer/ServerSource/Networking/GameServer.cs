@@ -309,9 +309,8 @@ namespace Barotrauma.Networking
                 SendConsoleMessage("Granted all permissions to " + newClient.Name + ".", newClient);
             }
 
-            SendChatMessage($"ServerMessage.JoinedServer~[client]={ClientLogName(newClient)}", ChatMessageType.Server, null, changeType: PlayerConnectionChangeType.Joined);
-            SendChatMessage("Steam ID:" + newClient.SteamID, ChatMessageType.Server, null, changeType: PlayerConnectionChangeType.Joined);
-            SendChatMessage("Steam Owner ID:" + newClient.SteamID, ChatMessageType.Server, null, changeType: PlayerConnectionChangeType.Joined);
+            SendChatMessage($"ServerMessage.JoinedServer~[client]={ClientLogName(newClient)}" + "\n" 
+            + "Steam ID: " + newClient.SteamID + "\n" + "Steam Owner ID: " + newClient.OwnerSteamID, ChatMessageType.Server, null, changeType: PlayerConnectionChangeType.Joined);
 
             if (previousPlayer != null && previousPlayer.Name != newClient.Name)
             {
@@ -3511,6 +3510,7 @@ namespace Barotrauma.Networking
 
         public void AssignJobs(List<Client> unassigned)
         {
+        //Сделать NoRoleBalance
             var jobList = JobPrefab.Prefabs.ToList();
             unassigned = new List<Client>(unassigned);
             unassigned = unassigned.OrderBy(sp => Rand.Int(int.MaxValue)).ToList();
