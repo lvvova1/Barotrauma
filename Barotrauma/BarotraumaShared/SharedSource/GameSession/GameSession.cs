@@ -357,13 +357,20 @@ namespace Barotrauma
             Submarine = Submarine.MainSub = new Submarine(SubmarineInfo);
             foreach (Submarine sub in Submarine.GetConnectedSubs())
             {
-                sub.TeamID = CharacterTeamType.FriendlyNPC;
+                sub.TeamID = CharacterTeamType.Team1;
                 foreach (Item item in Item.ItemList)
                 {
                     if (item.Submarine != sub) { continue; }
                     foreach (WifiComponent wifiComponent in item.GetComponents<WifiComponent>())
                     {
-                        wifiComponent.TeamID = sub.TeamID;
+                        if(sub.TeamID == CharacterTeamType.FriendlyNPC)
+                        {
+                            wifiComponent.TeamID = CharacterTeamType.Team1;
+                        }
+                        else
+                        {
+                            wifiComponent.TeamID = sub.TeamID;
+                        }
                     }
                 }
             }

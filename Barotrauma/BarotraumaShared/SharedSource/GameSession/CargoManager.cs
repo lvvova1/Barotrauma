@@ -276,7 +276,14 @@ namespace Barotrauma
                         {
                             foreach (WifiComponent wifiComponent in item.GetComponents<WifiComponent>())
                             {
-                                wifiComponent.TeamID = sub.TeamID;
+                                if(sub.TeamID == CharacterTeamType.FriendlyNPC)
+                                {
+                                    wifiComponent.TeamID = CharacterTeamType.Team1;
+                                }
+                                else
+                                {
+                                    wifiComponent.TeamID = sub.TeamID;
+                                }
                             }
                         }
                     }               

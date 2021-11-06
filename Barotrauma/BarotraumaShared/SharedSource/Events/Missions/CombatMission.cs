@@ -102,8 +102,8 @@ namespace Barotrauma
             subs = new Submarine[] { Submarine.MainSubs[0], Submarine.MainSubs[1] };
 
             subs[0].NeutralizeBallast(); 
-            subs[0].TeamID = CharacterTeamType.FriendlyNPC;
-            subs[0].DockedTo.ForEach(s => s.TeamID = CharacterTeamType.FriendlyNPC);
+            subs[0].TeamID = CharacterTeamType.Team1;
+            subs[0].DockedTo.ForEach(s => s.TeamID = CharacterTeamType.Team1);
 
             subs[1].NeutralizeBallast();
             subs[1].TeamID = CharacterTeamType.Team2;

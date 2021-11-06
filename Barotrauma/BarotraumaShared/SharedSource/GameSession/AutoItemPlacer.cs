@@ -263,7 +263,14 @@ namespace Barotrauma
                 };
                 foreach (WifiComponent wifiComponent in item.GetComponents<WifiComponent>())
                 {
-                    wifiComponent.TeamID = validContainer.Key.Item.Submarine.TeamID;
+                    if(validContainer.Key.Item.Submarine.TeamID == CharacterTeamType.FriendlyNPC)
+                    {
+                        wifiComponent.TeamID = CharacterTeamType.Team1;
+                    }
+                    else
+                    {
+                        wifiComponent.TeamID = validContainer.Key.Item.Submarine.TeamID;
+                    }
                 }
                 spawnedItems.Add(item);
                 validContainer.Key.Inventory.TryPutItem(item, null, createNetworkEvent: false);

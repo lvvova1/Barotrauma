@@ -38,7 +38,7 @@ namespace Barotrauma.Items.Components
                 item.AddTag("jobid:" + info.Job.Prefab.Identifier);
             }
 
-            TeamID = info.TeamID;
+            TeamID = info.TeamID == CharacterTeamType.FriendlyNPC ? CharacterTeamType.Team1 : info.TeamID;
 
             var head = info.Head;
 

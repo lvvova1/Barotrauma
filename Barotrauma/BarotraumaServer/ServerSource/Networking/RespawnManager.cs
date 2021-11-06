@@ -398,7 +398,7 @@ namespace Barotrauma.Networking
 			        }
 			        else
 			        {
-            			character.Info.SetExperience(5500);
+            			character.Info.SetExperience(7500);
                     }
 
                     //tell the respawning client they're no longer a traitor

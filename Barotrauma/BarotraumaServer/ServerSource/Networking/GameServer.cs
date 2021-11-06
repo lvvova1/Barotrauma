@@ -2217,21 +2217,44 @@ namespace Barotrauma.Networking
             for (int n = 0; n < teamCount; n++)
             {
                 var teamID = n == 0 ? CharacterTeamType.FriendlyNPC : CharacterTeamType.Team2;
-
-                Submarine.MainSubs[n].TeamID = teamID;
+                
+                if(teamID == CharacterTeamType.FriendlyNPC)
+                {
+                    Submarine.MainSubs[n].TeamID = CharacterTeamType.Team1;
+                }
+                else
+                {
+                    Submarine.MainSubs[n].TeamID = teamID;
+                }
+                
                 foreach (Item item in Item.ItemList)
                 {
                     if (item.Submarine == null) { continue; }
                     if (item.Submarine != Submarine.MainSubs[n] && !Submarine.MainSubs[n].DockedTo.Contains(item.Submarine)) { continue; }
                     foreach (WifiComponent wifiComponent in item.GetComponents<WifiComponent>())
                     {
-                        wifiComponent.TeamID = Submarine.MainSubs[n].TeamID;
+                        if(Submarine.MainSubs[n].TeamID == CharacterTeamType.FriendlyNPC)
+                        {
+                            wifiComponent.TeamID = CharacterTeamType.Team1;
+                        }
+                        else
+                        {
+                            wifiComponent.TeamID = Submarine.MainSubs[n].TeamID;
+                        }
                     }
                 }
                 foreach (Submarine sub in Submarine.MainSubs[n].DockedTo)
                 {
                     if (sub.Info.Type != SubmarineType.Player) { continue; }
-                    sub.TeamID = teamID;
+                    
+                    if(teamID == CharacterTeamType.FriendlyNPC)
+                    {
+                        sub.TeamID = CharacterTeamType.Team1;
+                    }
+                    else
+                    {
+                        sub.TeamID = teamID;
+                    }
                 }
 
                 //find the clients in this team
@@ -2369,7 +2392,7 @@ namespace Barotrauma.Networking
 					}
 					else
 					{
-                        spawnedCharacter.Info.SetExperience(5500);
+                        spawnedCharacter.Info.SetExperience(7500);
                     }
 
                     spawnedCharacter.OwnerClientEndPoint = teamClients[i].Connection.EndPointString;

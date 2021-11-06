@@ -44,6 +44,14 @@ namespace Barotrauma
                         if (wifiComponent != null)
                         {
                             wifiComponent.TeamID = TeamTag;
+                            if(TeamTag == CharacterTeamType.FriendlyNPC)
+                            {
+                                wifiComponent.TeamID = CharacterTeamType.Team1;
+                            }
+                            else
+                            {
+                                wifiComponent.TeamID = TeamTag;
+                            }
                         }
                         var idCard = item.GetComponent<Items.Components.IdCard>();
                         if (idCard != null)
