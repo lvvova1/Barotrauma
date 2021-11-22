@@ -383,7 +383,7 @@ namespace Barotrauma
 
             if (Submarine.MainSubs[1] == null)
             {
-                var enemySubmarineInfo = GameMode is PvPMode ? SubmarineInfo : GameMode.Missions.FirstOrDefault(m => m.EnemySubmarineInfo != null)?.EnemySubmarineInfo;
+                var enemySubmarineInfo = GameMode is PvPMode ? GameMain.NetLobbyScreen.SelectedShuttle : GameMode.Missions.FirstOrDefault(m => m.EnemySubmarineInfo != null)?.EnemySubmarineInfo;
                 if (enemySubmarineInfo != null)
                 {
                     Submarine.MainSubs[1] = new Submarine(enemySubmarineInfo, true);
