@@ -2042,36 +2042,42 @@ namespace Barotrauma
             playerFrame.Text = client.Name;
 
             playerFrame.ToolTip = "";
+            string pvpTeam = "";
             Color color = Color.White;
+
+            if (JobPrefab.Prefabs.ContainsKey(client.PreferredJob))
+            {
+                color = JobPrefab.Prefabs[client.PreferredJob].UIColor;
+                playerFrame.ToolTip = TextManager.GetWithVariable("jobpreference", "[job]", JobPrefab.Prefabs[client.PreferredJob].Name);
+            }
+            else
+            {
+                playerFrame.ToolTip = TextManager.GetWithVariable("jobpreference", "[job]", TextManager.Get("none"));
+            }
+
             if (SelectedMode == GameModePreset.PvP)
             {
                 switch (client.PreferredTeam)
                 {
                     case CharacterTeamType.Team1:
                         color = new Color(0, 110, 150, 255);
-                        playerFrame.ToolTip = TextManager.GetWithVariable("teampreference", "[team]", TextManager.Get("teampreference.team1"));
+                        pvpTeam = TextManager.GetWithVariable("teampreference", "[team]",
+                            TextManager.Get("teampreference.team1"));
                         break;
                     case CharacterTeamType.Team2:
                         color = new Color(150, 110, 0, 255);
-                        playerFrame.ToolTip = TextManager.GetWithVariable("teampreference", "[team]", TextManager.Get("teampreference.team2"));
+                        pvpTeam = TextManager.GetWithVariable("teampreference", "[team]",
+                            TextManager.Get("teampreference.team2"));
                         break;
                     default:
-                        playerFrame.ToolTip = TextManager.GetWithVariable("teampreference", "[team]", TextManager.Get("none"));
+                        pvpTeam = TextManager.GetWithVariable("teampreference", "[team]", TextManager.Get("none"));
                         break;
                 }
             }
-            else
-            {
-                if (JobPrefab.Prefabs.ContainsKey(client.PreferredJob))
-                {
-                    color = JobPrefab.Prefabs[client.PreferredJob].UIColor;
-                    playerFrame.ToolTip = TextManager.GetWithVariable("jobpreference", "[job]", JobPrefab.Prefabs[client.PreferredJob].Name);
-                }
-                else
-                {
-                    playerFrame.ToolTip = TextManager.GetWithVariable("jobpreference", "[job]", TextManager.Get("none"));
-                }
-            }
+
+            if(!String.IsNullOrEmpty(pvpTeam))
+                playerFrame.ToolTip = playerFrame.ToolTip + "\n" + pvpTeam;
+
             playerFrame.Color = color * 0.4f;
             playerFrame.HoverColor = color * 0.6f;
             playerFrame.SelectedColor = color * 0.8f;
